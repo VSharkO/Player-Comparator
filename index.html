@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>Player Comparator</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="RadarChart.js"></script>
+	
+	<style>
+		*{
+    box-sizing: border-box;
+		}
+
+
+		.w3-button {
+			width:150px;
+			}
+
+		.column {
+				float: left;
+				width: 33.33%;
+				padding: 3px;
+				position: relative;
+				
+		}
+
+		/* Clearfix (clear floats) */
+		.row::after {
+				content: "";
+				clear: both;
+				display: table;
+		}
+
+		.button{
+			background-color: rgb(47, 165, 233); /* LightBlue */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+
+		body {
+		  overflow: hidden;
+		  margin: 3px;
+		  font-size: 14px;
+		  font-family: "Helvetica Neue", Helvetica;
+		}
+
+
+		#chart {
+			position: relative;
+			right: 17%;
+			float: top;
+		}	
+
+		#picturePlayer {
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			float: left;
+			}	
+
+		#picturePlayer2 {
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			float :right;
+				}	
+
+		.dropbtn {
+			position: relative;
+			background-color: #4CAF50;
+			color: white;
+			padding: 13px;
+			font-size: 16px;
+			border: none;
+			cursor: pointer;
+				}
+
+		.dropbtn:hover, .dropbtn:focus {
+			background-color: #3e8e41;
+		}
+
+#myInput {
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+	margin-top: 10%;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+	max-height: 300px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+h2 {
+    font-size: 30px;
+	font-weight: bold;
+	font-style: italic;
+	padding: 14px;
+}
+
+p {
+	position : relative;
+    font-size: 20px;
+	font-weight: bold;
+	color: rgb(39, 37, 37);
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	float: center;
+} 
+
+</style>
+
+  </head>
+  <body>
+			<div class="w3-center">
+			<div class="w3-bar">
+
+		<div id="body">	
+				<div class="column">
+						<div class="dropdown" style="float:left; ">
+											<button onclick="fillDropdowns(1)" class="dropbtn">Select first player</button>
+											<div id="myDropdown1" class="dropdown-content">
+													<input type="text" placeholder="Search.." id="myInput1" onkeyup="filterFunction(1)">
+												  </div>
+												</div>
+							</div>
+							<h1 class="column" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif" > Player Comparator! </h1>
+							<div class="column">
+						<div class="dropdown" style="float:right;">
+											<button onclick="fillDropdowns(2)" class="dropbtn">Select second player</button>
+											<div id="myDropdown2" class="dropdown-content" style="right: 0;">
+													<input type="text" placeholder="Search.." id="myInput2" onkeyup="filterFunction(2)">
+												  </div>
+												</div>
+							</div>
+					</div>
+
+			<div class="row">
+					<div class="column">
+						<h2 id="playerOneName" style="float: left; color: dodgerblue"></h2>	
+					</div>
+					<div class="column">
+						<div></div>
+					</div>
+					<div class="column">
+						<h2 id="playerTwoName" style="float: right; color:orange"></h2>		
+					</div>
+			</div>
+
+			<div class="row">
+					<div class="column">
+							<img src="Pictures/player1.png" id = "picturePlayer1" alt="Player picture" height="500" width="300">
+					</div>
+					<div class="column">
+							<div id="chart"></div>
+					</div>
+					<div class="column">
+							<img src="Pictures/player2.png" id = "picturePlayer2" alt="Player Picture" height="500" width="300">
+					</div>
+			</div>
+
+			<div id="playersInfo" class="row">
+					<div id="firstPlayerInfoColumn" class="column">
+						<p id="playerOneNationality"> </p>
+						<p id="playerOneClub"> </p>
+						<p id="playerOneValue"> </p>
+						<p id="playerOneAge"> </p>
+					</div>
+					<div class="column">
+							<div></div>
+					</div>
+					<div id="secondPlayerInfoColumn" class="column">
+						<p id="playerTwoNationality"> </p>
+						<p id="playerTwoClub"> </p>
+						<p id="playerTwoValue"> </p>
+						<p id="playerTwoAge"> </p>		
+					</div>
+			</div>
+
+			
+	<script type="text/javascript" src="players.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body> 
+</html>
