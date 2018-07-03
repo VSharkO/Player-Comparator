@@ -1,13 +1,3 @@
-//Practically all this code comes from https://github.com/alangrafu/radar-chart-d3
-//I only made some additions and aesthetic adjustments to make the chart look better 
-//(of course, that is only my point of view)
-//Such as a better placement of the titles at each line end, 
-//adding numbers that reflect what each circular level stands for
-//Not placing the last level and slight differences in color
-//
-//For a bit of extra information check the blog about it:
-//http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
-
 var RadarChart = {
   draw: function(id, d, options){
   var cfg = {
@@ -74,7 +64,7 @@ var RadarChart = {
 	for(var j=0; j<cfg.levels; j++){
 	  var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
 	  g.selectAll(".levels")
-	   .data([1]) //dummy data
+	   .data([1])
 	   .enter()
 	   .append("svg:text")
 	   .attr("x", function(d){return levelFactor*(1-cfg.factor*Math.sin(0));})
@@ -212,7 +202,7 @@ var RadarChart = {
 
 	  series++;
 	});
-	//Tooltip
+	
 	tooltip = g.append('text')
 			   .style('opacity', 0)
 			   .style('font-family', 'sans-serif')
